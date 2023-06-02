@@ -1,16 +1,15 @@
 const { deterministicPartitionKey } = require("./dpk");
 
-jest.mock('crypto',()=>{
-  const originalModule= jest.requireActual('crypto');
+jest.mock("crypto", () => {
+  const originalModule = jest.requireActual("crypto");
   return {
     __esModule: true,
     ...originalModule,
-    createHash: (alg)=>({
-      update: (data) => (
-        { digest: (antything)=>"hashed"+data})
-    })
-  }
-})
+    createHash: (alg) => ({
+      update: (data) => ({ digest: (antything) => "hashed" + data }),
+    }),
+  };
+});
 
 describe("deterministicPartitionKey", () => {
   it("Returns the literal '0' when given no input", () => {
@@ -19,14 +18,15 @@ describe("deterministicPartitionKey", () => {
   });
 
   it("should return the given key it it is lower than 256", () => {
-    const fakeKey = "mockedPartitionKey"
+    const fakeKey = "mockedPartitionKey";
     const trivialKey = deterministicPartitionKey({ partitionKey: fakeKey });
     expect(trivialKey).toEqual(fakeKey);
-  })
+  });
 
   it("should return a hash if fakeKey is greater than 256", () => {
-    const fakeKey = "mockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKey";
+    const fakeKey =
+      "mockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKey";
     const trivialKey = deterministicPartitionKey({ partitionKey: fakeKey });
-    expect(trivialKey).toEqual("hashed"+fakeKey);
-  })
+    expect(trivialKey).toEqual("hashed" + fakeKey);
+  });
 });
