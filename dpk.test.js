@@ -13,26 +13,26 @@ jest.mock("crypto", () => {
 
 describe("deterministicPartitionKey", () => {
   it("Returns the literal '0' when given no input", () => {
-    const trivialKey = deterministicPartitionKey();
-    expect(trivialKey).toBe("0");
+    const SUT = deterministicPartitionKey();
+    expect(SUT).toBe("0");
   });
 
   it("should return the given key it it is lower than 256", () => {
     const fakeKey = "mockedPartitionKey";
-    const trivialKey = deterministicPartitionKey({ partitionKey: fakeKey });
-    expect(trivialKey).toEqual(fakeKey);
+    const SUT = deterministicPartitionKey({ partitionKey: fakeKey });
+    expect(SUT).toEqual(fakeKey);
   });
 
   it("should return hash even if an object is given", () => {
     const fakeKey = { loren: "ipsun" };
-    const trivialKey = deterministicPartitionKey({ partitionKey: fakeKey });
-    expect(trivialKey).toEqual(JSON.stringify(fakeKey));
+    const SUT = deterministicPartitionKey({ partitionKey: fakeKey });
+    expect(SUT).toEqual(JSON.stringify(fakeKey));
   });
 
   it("should return a hash if fakeKey is greater than 256", () => {
     const fakeKey =
       "mockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKey";
-    const trivialKey = deterministicPartitionKey({ partitionKey: fakeKey });
-    expect(trivialKey).toEqual("hashed" + fakeKey);
+    const SUT = deterministicPartitionKey({ partitionKey: fakeKey });
+    expect(SUT).toEqual("hashed" + fakeKey);
   });
 });
