@@ -23,6 +23,12 @@ describe("deterministicPartitionKey", () => {
     expect(trivialKey).toEqual(fakeKey);
   });
 
+  it("should return hash even if an object is given", () => {
+    const fakeKey = { loren: "ipsun" };
+    const trivialKey = deterministicPartitionKey({ partitionKey: fakeKey });
+    expect(trivialKey).toEqual(JSON.stringify(fakeKey));
+  });
+
   it("should return a hash if fakeKey is greater than 256", () => {
     const fakeKey =
       "mockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKey";
