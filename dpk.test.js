@@ -6,7 +6,7 @@ jest.mock("crypto", () => {
     __esModule: true,
     ...originalModule,
     createHash: (alg) => ({
-      update: (data) => ({ digest: (antything) => "hashed" + data }),
+      update: (data) => ({ digest: (anything) => "hashed" + data }),
     }),
   };
 });
@@ -21,6 +21,12 @@ describe("deterministicPartitionKey", () => {
     const fakeKey = "mockedPartitionKey";
     const SUT = deterministicPartitionKey({ partitionKey: fakeKey });
     expect(SUT).toEqual(fakeKey);
+  });
+
+  it("should return the hashed object if the event has no partitionKey", () => {
+    const fakeEvent = { anytthing: "mockedPartitionKey" };
+    const SUT = deterministicPartitionKey(fakeEvent);
+    expect(SUT).toEqual("hashed"+JSON.stringify(fakeEvent));
   });
 
   it("should return hash even if an object is given", () => {
