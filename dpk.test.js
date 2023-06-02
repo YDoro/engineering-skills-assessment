@@ -36,8 +36,7 @@ describe("deterministicPartitionKey", () => {
   });
 
   it("should return a hash if fakeKey is greater than 256", () => {
-    const fakeKey =
-      "mockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKeymockedPartitionKey";
+    const fakeKey ="1234";
     const SUT = deterministicPartitionKey({ partitionKey: fakeKey });
     expect(SUT).toEqual("hashed" + fakeKey);
   });

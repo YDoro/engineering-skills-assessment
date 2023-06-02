@@ -4,8 +4,8 @@ const generateHash = (data) => {
   return crypto.createHash("sha3-512").update(data).digest("hex");
 };
 
-exports.deterministicPartitionKey = (event) => {
-  const MAX_PARTITION_KEY_LENGTH = 256;
+exports.deterministicPartitionKey = (event,maxLength) => {
+  const MAX_PARTITION_KEY_LENGTH = maxLength || 256;
 
   if (!event) {
     return "0";
