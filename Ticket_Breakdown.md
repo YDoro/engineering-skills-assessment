@@ -20,7 +20,9 @@ You will be graded on the level of detail in each ticket, the clarity of the exe
 Assuming that the custom agent id is not mandatory.
 
 Glossary:
+
 ETC - estimated time for completion
+
 DOD - definition of done
 
 ---
@@ -51,8 +53,6 @@ We should index the `facility_id` with the `agent_id` to ensure that each faclit
 We should create on the project data layer the custom agent id by facility handling and validations
 
 We should ensure that the application will not bleed on duplicated indexes 
-
-
 
 **NOTE**: This task should contain unit tests to ensure that it works as described
 
